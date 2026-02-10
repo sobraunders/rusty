@@ -1,6 +1,7 @@
 mod message;
 mod database;
 mod commands;
+mod games;
 
 use irc::client::prelude::*;
 use std::default::Default;
@@ -8,11 +9,14 @@ use futures::TryStreamExt;
 use message::ParsedMessage;
 use database::Database;
 use commands::handle_command;
+use games::GameManager;
 
 #[tokio::main]
 async fn main() -> irc::error::Result<()> {
     let db = Database::new("bot_data.db")
         .expect("Failed to initialize database");
+
+    let games = GameManager::new();
 
     let config = Config {
         nickname: Some("rusty".to_string()),
@@ -37,7 +41,7 @@ async fn main() -> irc::error::Result<()> {
                 let parsed = ParsedMessage::parse(&text, author.clone(), channel.clone());
 
                 if parsed.is_command() {
-                    handle_command(&client, &parsed, &db)?;
+                    handle_command(&client, &parsed, &db, &games).await?;
                 }
             }
             _ => {}
