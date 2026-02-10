@@ -1,6 +1,6 @@
 # Rusty
 
-A feature-rich IRC bot written in Rust with SSL/TLS support, SQLite database integration, and permission-based command access.
+A feature-rich IRC bot written, using AI slop generation, in Rust with SSL/TLS support, SQLite database integration, and permission-based command access.
 
 ## Features
 
