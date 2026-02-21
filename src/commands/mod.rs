@@ -15,6 +15,7 @@ pub async fn handle_command(client: &Client, msg: &ParsedMessage, db: &Database,
         "hello" => public::cmd_hello(client, msg),
         "echo" => public::cmd_echo(client, msg),
         "hangman" => public::cmd_hangman(client, msg, games).await,
+        "weather" => public::cmd_weather(client, msg, db).await,
         "help" => public::cmd_help(client, msg),
         
         // Restricted commands

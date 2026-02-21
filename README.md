@@ -44,12 +44,36 @@ cargo build --release
 cargo run --release
 ```
 
+### 4. Configure API Keys (Optional)
+
+If you plan to use the `!weather` command, you'll need an OpenWeatherMap API key:
+
+1. Get a free API key from [openweathermap.org](https://openweathermap.org/api)
+
+2. Copy the example config file:
+```bash
+cp config.yaml.example config.yaml
+```
+
+3. Edit `config.yaml` and add your API key:
+```yaml
+openweather_api_key: "your_actual_api_key_here"
+```
+
+4. Load the API key into the database:
+```bash
+cargo run --bin set_api_key
+```
+
+**Note:** `config.yaml` is in `.gitignore` to keep your API keys private and out of version control.
+
 ## Commands
 
 ### Public Commands (No permission required)
 - `!ping` - Responds with "pong!"
 - `!hello` - Greets you
 - `!echo <message>` - Echoes back your message
+- `!weather [location]` - Get weather for a location (stores location for future use)
 - `!help` - Shows available commands
 
 ### Restricted Commands (Permission level >= 1)
